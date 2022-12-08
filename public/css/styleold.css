@@ -1,0 +1,20 @@
+.posts{
+    width: 50px;
+    height: 50px;
+    background-color: blue;
+}
+
+.map{
+    width: 400px;
+    height: 400px;
+}
+.dojobackground{
+    background-image: url("../imgs/dojoBackground.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.header{
+    background-color: white;
+    width: 100%;
+}

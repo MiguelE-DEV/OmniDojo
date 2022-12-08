@@ -1,0 +1,60 @@
+<%- include('partials/header') -%>
+    <!-- loader start -->
+    <div class="loading-text">
+      <div>
+          <h1 class="animate">Loading</h1>
+      </div>
+  </div>
+  <!-- loader end -->
+  <section class="h-100 gradient-custom-2">
+    <div class="mainContainer container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-9 col-xl-7">
+          <div class="card">
+            <% if(user){ %>
+              <div class="rounded-top text-white d-flex flex-row"
+                style="background-color: #9d75e4; height:200px; border:2px solid black;">
+                <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+                  <img src="<%= user.image %>"
+                    alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                    style="width: 150px; z-index: 1">
+                </div>
+                <div class="ms-3" style="margin-top: 130px;">
+                  <h2 style="color: #F9F871">User: <%= user.userName %>
+                  </h2>
+                  <h3>Email: <%= user.email %></h3>
+                </div>
+              </div>
+              <div class="card-body p-4 text-black">
+                <form class="createPost" action="/comment/editProfile/<%= user.id %>?_method=PUT" enctype="multipart/form-data" method="POST">
+                  <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="wrapper text-center">
+                      <div class="profileTitle">
+                        <h2>Upload A Profile Image</h2>
+                      </div>
+                      <label for="imgUpload" class="form-label"></label>
+                      <input type="file" class="form-control" id="imageUpload" name="file">
+                      <button id="createPostSubmit" type="submit" class="btn btn-solid btn-lg ms-auto" value="Upload"> Apply </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- <div class="mainContainer">
+<div>
+    <p><strong>User Name</strong>: <%= user.userName %>
+    </p>
+    <p><strong>Email</strong>: <%= user.email %>
+    </p>
+    <a href="/logout" class="col-3 btn btn-solid btn-lg ms-auto">Logout</a>
+</div>
+</div> -->
+
+  <%- include('partials/footer') -%>
