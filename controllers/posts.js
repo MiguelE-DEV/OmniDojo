@@ -3,8 +3,6 @@ const JSJoda = require("js-joda");
 const LocalDate = JSJoda.LocalDate;
 const Post = require("../models/Post");
 const Comment = require("../models/Comment")
-
-const API_KEY = require('../config/apikey.js').key;
 let options = {provider: 'openstreetmap'};
 const nodeGeocoder = require('node-geocoder');
 const comments = require("./comments");
@@ -93,31 +91,12 @@ module.exports = {
         res.redirect("/feed");
       }
     },
-  // likePost: async (req, res) => {
-  //   try {
-  //     await Post.findOneAndUpdate(
-  //       { _id: req.params.id },
-  //       {
-  //         $inc: { likes: 1 },
-  //       }
-  //     );
-  //     console.log("Likes +1");
-  //     res.redirect(`/post/${req.params.id}`);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // },
   attendPost: async(req,res) =>{
-      let isExisting = await Post.findOne({ _id: req.params.id, attendance: req.user.userName }) //mongo can search for mID in array of [mIDs]
+      let isExisting = await Post.findOne({ _id: req.params.id, attendance: req.user.userName })
       let query = { _id: req.params.id }
       let update = isExisting ? { $pull: { attendance: req.user.userName } } : { $addToSet: { attendance: req.user.userName } };
     try {
-      await Post.updateOne(query,update
-        // { _id: req.params.id },
-        // {
-        //   $addToSet: {attendance: req.user.userName},
-        // }
-      );
+      await Post.updateOne(query,update);
       console.log("You are attending the event");
       res.redirect(`/post/${req.params.id}`);
     } catch (err) {
@@ -126,9 +105,6 @@ module.exports = {
   },
   deletePost: async (req, res) => {
     try {
-      // Find post by id
-
-      // Delete post from db
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");
       res.redirect("/feed");

@@ -30,14 +30,18 @@
                 <% } %>
                   <% } %>
                     <% if(post.attendance.length > 3 ){%>
-                      <span>and More</span>
+                      <span>...and More</span>
                       <%} %>
           </div>
           <div class="letsGO">
             <form class="" action="/post/attendPost/<%= post.id %>?_method=PUT" method="POST">
-              <button class="btn btn-solid btn-lg ms-auto" type="submit">Let's Go!</button>
+              <% if (post.attendance.includes(user.userName)){ %>
+                <button class="btn btn-solid btn-lg ms-auto" type="submit">I'm NOT Going!</button>
+                <% }else{ %>
+                  <button class="btn btn-solid btn-lg ms-auto" type="submit">I'm Going!</button>
+                  <% } %>
             </form>
-            <% if(post.user._id == user.id){ %>
+            <% if(post.user._id==user.id){ %>
               <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="">
                 <button class="btn btn-solid btn-lg ms-auto" type="submit">Delete Meetup</button>
               </form>

@@ -2,7 +2,6 @@ const express = require("express");
 const JSJoda = require("js-joda")
 const LocalDate = JSJoda.LocalDate;
 const router = express.Router();
-const API_KEY = require('../config/apikey.js').key;
 const authController = require("../controllers/auth");
 const homeController = require("../controllers/home");
 const postsController = require("../controllers/posts");
